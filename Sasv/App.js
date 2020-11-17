@@ -1,87 +1,52 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View,ScrollView } from 'react-native';
+import { StyleSheet, Text, Button, TouchableWithoutFeedback, View,ScrollView } from 'react-native';
 
 export default function App() {
   return (
     <ScrollView style={styles.container}>
+      <Button title='Cadastrar nova Ong'></Button>
 
-      <View style={styles.empresa}>
+     <Ong/>
+     <Ong/>
+     <Ong/>
 
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-
-      <View style={styles.empresa}>
-
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-      <View style={styles.empresa}>
-
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-      <View style={styles.empresa}>
-
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-      <View style={styles.empresa}>
-
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-      <View style={styles.empresa}>
-
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-      <View style={styles.empresa}>
-
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-      
-      <View style={styles.empresa}>
-
-        <Text style={styles.titulo} >Nome empresa</Text>
-        <Text>Descrição</Text>
-        
-
-      </View>
-
-      
     </ScrollView>
   );
 }
+
+const Ong = () =>{
+
+  return(
+    <View style={styles.empresa}>
+
+    <Text style={styles.titulo} >Ong Pro anima</Text>
+    <Text>Ong criada para resgatar animais em situação de vulnerabilibdade</Text>
+
+   
+    <Button title='Cadastrar voluntario'></Button>
+    <Button title='Visualizar voluntarios'></Button>
+     
+     </View>
+    
+     
+  );
+
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    marginVertical:35,
   },
   empresa:{
     marginHorizontal:20,
-    marginVertical:10,
+    marginVertical:5,
     margin:20,
     padding:20,
-    backgroundColor:'green',
-    borderRadius:3,
+    backgroundColor:'orange',
+    borderRadius:20,
   },
   titulo:{
     fontSize:20,
