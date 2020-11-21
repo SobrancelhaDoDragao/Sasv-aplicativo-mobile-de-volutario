@@ -10,18 +10,21 @@ export default function Home() {
   const [ongs,updateOngs] = useState([]);
   
   //const RenderOng = ({ong}) =>  <Text>{ong}</Text>;
-  const teste = () =>{
+  const CriarOng = () =>{
     updateOngs([...ongs,ong]);
   }
-    
+    console.log(ong)
     return (
       <View style={styles.container}>
         <Text>Nome:</Text>
-        <TextInput onChangeText={text =>updateOng(text)}></TextInput>
+        <TextInput onChangeText={text =>updateOng({...ong,Titulo:text})}></TextInput>
+
+        <Text>Descrição:</Text>
+        <TextInput onChangeText={text =>updateOng({...ong,Descricao:text})}></TextInput>
         
-        <Button onPress={teste} title="Criar ong" color='coral' ></Button>
+        <Button onPress={CriarOng} title="Criar ong" color='coral' ></Button>
         
-        <FlatList data={ongs} renderItem={({item}) => <Ong Titulo={item}/>}/>
+        <FlatList data={ongs}  renderItem={({item}) => <Ong Titulo={item.Titulo} Descricao={item.Descricao}/>} keyExtractor= {(item)=> item.Titulo} />
       
       </View>
     
