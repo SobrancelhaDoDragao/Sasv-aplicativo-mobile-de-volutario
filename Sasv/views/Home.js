@@ -13,14 +13,14 @@ export default function Home() {
   const CriarOng = () =>{
     updateOngs([...ongs,ong]);
   }
-    console.log(ong)
+    
     return (
       <View style={styles.container}>
         <Text>Nome:</Text>
-        <TextInput onChangeText={text =>updateOng({...ong,Titulo:text})}></TextInput>
+        <TextInput style={styles.input} onChangeText={text =>updateOng({...ong,Titulo:text})}></TextInput>
 
         <Text>Descrição:</Text>
-        <TextInput onChangeText={text =>updateOng({...ong,Descricao:text})}></TextInput>
+        <TextInput style={styles.input} onChangeText={text =>updateOng({...ong,Descricao:text})}></TextInput>
         
         <Button onPress={CriarOng} title="Criar ong" color='coral' ></Button>
         
@@ -34,10 +34,10 @@ export default function Home() {
   const Ong = (props) =>{
   
     return(
-      <View style={styles.empresa}>
+      <View style={styles.ong}>
   
       <Text style={styles.titulo}>{props.Titulo}</Text>
-      <Text>{props.Descricao}</Text>
+      <Text style={styles.descricao} >{props.Descricao}</Text>
   
      
       <Button title='Contribuir'></Button>
@@ -53,18 +53,29 @@ export default function Home() {
       flex: 1,
       backgroundColor: '#fff',
     },
-    empresa:{
+    descricao:{
+      marginBottom:10,
+    },
+    ong:{
       marginHorizontal:20,
       marginVertical:5,
       margin:20,
       padding:20,
       backgroundColor:'orange',
       borderRadius:20,
+      marginBottom:10,
     },
     titulo:{
       fontSize:20,
       fontWeight:"bold",
-    }
+    },
+    input:{
+      width:"80%",
+      borderStartColor:"#fff",
+      padding:7,
+      marginBottom:15,
+    },
+ 
   });
   
   
