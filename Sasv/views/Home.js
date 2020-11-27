@@ -11,11 +11,22 @@ export default function Home() {
   
   //const RenderOng = ({ong}) =>  <Text>{ong}</Text>;
   const CriarOng = () =>{
-    updateOngs([...ongs,ong]);
+    if(ong.Titulo != '' & ong.Descricao != ''){
+      updateOngs([...ongs,ong]);
+    }
+  }
+
+  const pressHandler = (key) =>{
+    updateOngs((prevOngs)=>{  
+  
+    return prevOngs.filter(unico => unico.Titulo != key);
+    
+    });
   }
     
     return (
       <View style={styles.container}>
+
         <Text>Nome:</Text>
         <TextInput style={styles.input} onChangeText={text =>updateOng({...ong,Titulo:text})}></TextInput>
 
@@ -24,20 +35,22 @@ export default function Home() {
         
         <Button onPress={CriarOng} title="Criar ong" color='coral' ></Button>
         
-        <FlatList data={ongs}  renderItem={({item}) => <Ong Titulo={item.Titulo} Descricao={item.Descricao}/>} keyExtractor= {(item)=> item.Titulo} />
+        <FlatList data={ongs}  renderItem={({item}) => <Ong item={item}  pressHandler={pressHandler} />} keyExtractor= {(item)=> item.Titulo} />
       
       </View>
     
     );
   }
   
-  const Ong = (props) =>{
+  const Ong = ({item,pressHandler}) =>{
   
     return(
       <View style={styles.ong}>
-  
-      <Text style={styles.titulo}>{props.Titulo}</Text>
-      <Text style={styles.descricao} >{props.Descricao}</Text>
+
+      <TouchableWithoutFeedback  onPress={() => pressHandler(item.Titulo) }><Text style={styles.BotaoExcluir}>Apagar</Text></TouchableWithoutFeedback>
+
+      <Text style={styles.titulo}>{item.Titulo}</Text>
+      <Text style={styles.descricao}>{item.Descricao}</Text>
   
      
       <Button title='Contribuir'></Button>
@@ -53,6 +66,16 @@ export default function Home() {
       flex: 1,
       backgroundColor: '#fff',
     },
+    BotaoExcluir:{
+      backgroundColor:'white',
+      padding:5,
+      marginHorizontal:200,
+      borderRadius:20,
+      justifyContent:"center",
+      textAlign:"center",
+      borderWidth: 2,
+      width:"30%",
+    },
     descricao:{
       marginBottom:10,
     },
@@ -61,8 +84,10 @@ export default function Home() {
       marginVertical:5,
       margin:20,
       padding:20,
-      backgroundColor:'orange',
-      borderRadius:20,
+      borderWidth: 2,
+      borderColor:'coral',
+      backgroundColor:'white',
+      borderRadius:9,
       marginBottom:10,
     },
     titulo:{
