@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { StyleSheet, Text, Button, TouchableWithoutFeedback, View,ScrollView, FlatList} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 
-export default function Home() {
+export default function Home({navigation}) {
+ 
   //Criando uma ong individual
   const [ong,updateOng] = useState({Titulo:'',Descricao:''});
   //Criando o array para adicionar as ongs
@@ -34,15 +35,16 @@ export default function Home() {
         <TextInput style={styles.input} onChangeText={text =>updateOng({...ong,Descricao:text})}></TextInput>
         
         <Button onPress={CriarOng} title="Criar ong" color='coral' ></Button>
-        
-        <FlatList data={ongs}  renderItem={({item}) => <Ong item={item}  pressHandler={pressHandler} />} keyExtractor= {(item)=> item.Titulo} />
+
+
+        <FlatList data={ongs}  renderItem={({item}) => <Ong navigation={navigation} item={item}  pressHandler={pressHandler} />} keyExtractor= {(item)=> item.Titulo} />
       
       </View>
     
     );
   }
   
-  const Ong = ({item,pressHandler}) =>{
+  const Ong = ({item,pressHandler,navigation}) =>{
   
     return(
       <View style={styles.ong}>
@@ -53,7 +55,7 @@ export default function Home() {
       <Text style={styles.descricao}>{item.Descricao}</Text>
   
      
-      <Button title='Contribuir'></Button>
+      <Button onPress={()=>navigation.navigate('Contribuir')} title='Contribuir'></Button>
     
        </View>
        
