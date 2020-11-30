@@ -5,8 +5,9 @@ import { TextInput } from 'react-native-gesture-handler';
 
 export default function Home({navigation}) {
  
+
   //Criando uma ong individual
-  const [ong,updateOng] = useState({Titulo:'',Descricao:''});
+  const [ong,updateOng] = useState({Titulo:'',Descricao:'',Contato:''});
   //Criando o array para adicionar as ongs
   const [ongs,updateOngs] = useState([]);
   
@@ -33,11 +34,14 @@ export default function Home({navigation}) {
 
         <Text>Descrição:</Text>
         <TextInput style={styles.input} onChangeText={text =>updateOng({...ong,Descricao:text})}></TextInput>
+
+        <Text>Informações para contato:</Text>
+        <TextInput style={styles.input} onChangeText={text =>updateOng({...ong,Contato:text})}></TextInput>
         
         <Button onPress={CriarOng} title="Criar ong" color='coral' ></Button>
 
 
-        <FlatList data={ongs}  renderItem={({item}) => <Ong navigation={navigation} item={item}  pressHandler={pressHandler} />} keyExtractor= {(item)=> item.Titulo} />
+        <FlatList data={ongs}  renderItem={({item}) =><Ong navigation={navigation} item={item}  pressHandler={pressHandler} />} keyExtractor= {(item)=> item.Titulo} />
       
       </View>
     
@@ -45,17 +49,20 @@ export default function Home({navigation}) {
   }
   
   const Ong = ({item,pressHandler,navigation}) =>{
+
+    //Criando uma ong individual
+    const [ong,updateOng] = useState({Titulo:item.Titulo,Descricao:item.Descricao,Contato:item.Contato})
   
     return(
       <View style={styles.ong}>
 
       <TouchableWithoutFeedback  onPress={() => pressHandler(item.Titulo) }><Text style={styles.BotaoExcluir}>Apagar</Text></TouchableWithoutFeedback>
 
-      <Text style={styles.titulo}>{item.Titulo}</Text>
-      <Text style={styles.descricao}>{item.Descricao}</Text>
+      <Text style={styles.titulo}>{ong.Titulo}</Text>
+      <Text style={styles.descricao}>{ong.Descricao}</Text>
   
      
-      <Button onPress={()=>navigation.navigate('Contribuir')} title='Contribuir'></Button>
+      <Button onPress={()=>navigation.navigate('Contribuir',{ong})} title='Contribuir'></Button>
     
        </View>
        
